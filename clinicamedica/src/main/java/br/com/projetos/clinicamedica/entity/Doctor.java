@@ -23,6 +23,9 @@ public class Doctor {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "birthday")
     private Date birthday;
 
@@ -60,6 +63,14 @@ public class Doctor {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Date getBirthday() {

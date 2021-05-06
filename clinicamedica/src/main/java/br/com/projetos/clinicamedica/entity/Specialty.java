@@ -21,6 +21,9 @@ public class Specialty {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "name")
+    private String name;
+
     @Column(name = "description")
     private String description;
 
@@ -54,6 +57,14 @@ public class Specialty {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getDescription() {

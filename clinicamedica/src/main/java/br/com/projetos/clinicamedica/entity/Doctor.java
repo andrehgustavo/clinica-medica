@@ -58,8 +58,15 @@ public class Doctor {
         this.active = active;
     }
     
+    
+    public Doctor(Long id, String name, Date birthday, boolean active) {
+		this.id = id;
+		this.name = name;
+		this.birthday = birthday;
+		this.active = active;
+	}
 
-    //################  Getters/Setters #################
+	//################  Getters/Setters #################
 
     public Long getId() {
         return id;

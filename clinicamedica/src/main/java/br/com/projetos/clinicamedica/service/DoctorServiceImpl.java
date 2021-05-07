@@ -35,23 +35,23 @@ public class DoctorServiceImpl implements DoctorService{
 	}
 
 	@Override
-	public void save(Doctor theDoctor) {
+	public Doctor save(Doctor theDoctor) {
 		// Caso o usuário envie um ID do frontend pelo JSON,
 		// esse resguardo seta ele como 0, para o sistema forçar a entender como um novo
 		// ao invés de fazer o update - Boas práticas!
 		theDoctor.setId(0L);
-		doctorRepository.save(theDoctor);		
+		return doctorRepository.save(theDoctor);		
 	}
 
 	@Override
-	public boolean deleteById(Long theId) {
+	public void deleteById(Long theId) {
 		Optional<Doctor> optionalDoctor = doctorRepository.findById(theId);
 
 		if(optionalDoctor.isPresent()){
 			doctorRepository.deleteById(theId);
-			return true;
+		}else {		
+			throw new ErrorRegisterNotFoundInDataBase("Médico com Id " + theId + " não existe no banco de dados.");
 		}
-		throw new ErrorRegisterNotFoundInDataBase("Médico com Id " + theId + " não existe no banco de dados.");
 	}
 
 	@Override

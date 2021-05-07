@@ -9,9 +9,9 @@ public interface DoctorService {
 
 	public Doctor findById(Long theId);
 
-	public void save(Doctor theDoctor);
+	public Doctor save(Doctor theDoctor);
 
 	public Doctor update(Doctor theDoctor);
 
-	public boolean deleteById(Long theId);
+	public void deleteById(Long theId);
 }

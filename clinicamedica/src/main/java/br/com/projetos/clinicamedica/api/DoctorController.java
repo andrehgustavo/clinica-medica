@@ -1,4 +1,4 @@
-package br.com.projetos.clinicamedica.controller;
+package br.com.projetos.clinicamedica.api;
 
 import java.util.List;
 
@@ -41,10 +41,10 @@ public class DoctorController {
 	}
 
 	@PostMapping("/doctors")
-	public ResponseEntity<?> addDoctor(@RequestBody Doctor theDoctor) {
+	public ResponseEntity<?> createDoctor(@RequestBody Doctor theDoctor) {
 		try {
-			doctorService.save(theDoctor);
-			return new ResponseEntity<>(theDoctor, HttpStatus.CREATED);
+			Doctor savedDoctor = doctorService.save(theDoctor);
+			return new ResponseEntity<>(savedDoctor.getId(), HttpStatus.CREATED);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body(e.toString());
 		}

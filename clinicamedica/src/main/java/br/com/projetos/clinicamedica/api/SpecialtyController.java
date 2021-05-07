@@ -1,4 +1,4 @@
-package br.com.projetos.clinicamedica.controller;
+package br.com.projetos.clinicamedica.api;
 
 import java.util.List;
 

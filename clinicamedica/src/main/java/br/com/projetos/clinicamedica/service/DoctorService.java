@@ -11,5 +11,7 @@ public interface DoctorService {
 
 	public void save(Doctor theDoctor);
 
-	public void deleteById(Long theId);
+	public Doctor update(Doctor theDoctor);
+
+	public boolean deleteById(Long theId);
 }

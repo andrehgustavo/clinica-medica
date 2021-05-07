@@ -1,6 +1,7 @@
 package br.com.projetos.clinicamedica.entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 public class Specialty {
@@ -30,27 +33,29 @@ public class Specialty {
     @Column(name = "active")
     private boolean active;
 
-    @ManyToMany(fetch = FetchType.LAZY,
-			   cascade = {CascadeType.DETACH, CascadeType.MERGE,
-			   CascadeType.PERSIST, CascadeType.REFRESH})
-	@JoinTable(
-			name = "doctor_specialty",
-			joinColumns = @JoinColumn(name = "specialty_id"),
-			inverseJoinColumns = @JoinColumn(name = "doctor_id")
-			)
-	private List<Doctor> doctors;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = { CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST,
+            CascadeType.REFRESH })
+    @JoinTable(
+                name = "doctor_specialty", 
+                joinColumns = @JoinColumn(name = "specialty_id"), 
+                inverseJoinColumns = @JoinColumn(name = "doctor_id")
+                )
+    @JsonIgnoreProperties("specialties")
+    private Set<Doctor> doctors= new HashSet<>();
 
-//################  Constructors #################
+    // ################ Constructors #################
     public Specialty() {
     }
 
-    public Specialty(String description, boolean active, List<Doctor> doctors) {
+    public Specialty(String name, String description, boolean active) {
+        this.name = name;
         this.description = description;
         this.active = active;
-        this.doctors = doctors;
     }
 
-//################  Getters/Setters #################
+
+
+    // ################ Getters/Setters #################
     public Long getId() {
         return id;
     }
@@ -83,15 +88,29 @@ public class Specialty {
         this.active = active;
     }
 
-    public List<Doctor> getDoctors() {
+    public Set<Doctor> getDoctors() {
         return doctors;
     }
 
-    public void setDoctors(List<Doctor> doctors) {
+    public void setDoctors(Set<Doctor> doctors) {
         this.doctors = doctors;
     }
-    
-//################  To String/Others #################
+
+    public void addDoctor(Doctor theDoctor) {
+        if (doctors == null) {
+            doctors = new HashSet<>();
+        }
+        doctors.add(theDoctor);
+    }
+
+    public void removeDoctor(Doctor theDoctor){
+        if (doctors == null) {
+            doctors = new HashSet<>();
+        }
+        doctors.remove(theDoctor);
+    }
+
+    // ################ To String/Others #################
     @Override
     public String toString() {
         return "Specialty [active=" + active + ", description=" + description + ", doctors=" + doctors + ", id=" + id
@@ -102,9 +121,6 @@ public class Specialty {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (active ? 1231 : 1237);
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((doctors == null) ? 0 : doctors.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
         return result;
     }
@@ -118,18 +134,6 @@ public class Specialty {
         if (getClass() != obj.getClass())
             return false;
         Specialty other = (Specialty) obj;
-        if (active != other.active)
-            return false;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        if (doctors == null) {
-            if (other.doctors != null)
-                return false;
-        } else if (!doctors.equals(other.doctors))
-            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
@@ -138,5 +142,6 @@ public class Specialty {
         return true;
     }
 
-    
+   
+
 }

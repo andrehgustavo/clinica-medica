@@ -1,7 +1,8 @@
 package br.com.projetos.clinicamedica.entity;
 
 import java.sql.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,6 +15,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "doctor")
@@ -41,22 +44,23 @@ public class Doctor {
 			joinColumns = @JoinColumn(name = "doctor_id"),
 			inverseJoinColumns = @JoinColumn(name = "specialty_id")
 			)
-    @Column(name="specialties")
-    private List<Specialty> specialties;
+    @JsonIgnoreProperties("doctors")
+    private Set<Specialty> specialties = new HashSet<>();
 
     //################  Constructors #################
     public Doctor(){
 
     }
 
-    public Doctor(Date birthday, boolean active, List<Specialty> specialties) {
+    public Doctor(String name, Date birthday, boolean active) {
+        this.name = name;
         this.birthday = birthday;
         this.active = active;
-        this.specialties = specialties;
     }
+    
 
     //################  Getters/Setters #################
-    
+
     public Long getId() {
         return id;
     }
@@ -89,12 +93,26 @@ public class Doctor {
         this.active = active;
     }
 
-    public List<Specialty> getSpecialties() {
+    public Set<Specialty> getSpecialties() {
         return specialties;
     }
 
-    public void setSpecialties(List<Specialty> specialties) {
+    public void setSpecialties(Set<Specialty> specialties) {
         this.specialties = specialties;
+    }
+
+    public void addSpecialty(Specialty theSpecialty) {
+        if(specialties == null) {
+            specialties = new HashSet<>();
+        }
+        specialties.add(theSpecialty);
+    }
+
+    public void removeSpecialty(Specialty theSpecialty) {
+        if(specialties == null) {
+            specialties = new HashSet<>();
+        }
+        specialties.remove(theSpecialty);
     }
 //################  To String/Others #################
 
@@ -108,13 +126,9 @@ public class Doctor {
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + (active ? 1231 : 1237);
-        result = prime * result + ((birthday == null) ? 0 : birthday.hashCode());
         result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((specialties == null) ? 0 : specialties.hashCode());
         return result;
     }
-
 
     @Override
     public boolean equals(Object obj) {
@@ -125,25 +139,15 @@ public class Doctor {
         if (getClass() != obj.getClass())
             return false;
         Doctor other = (Doctor) obj;
-        if (active != other.active)
-            return false;
-        if (birthday == null) {
-            if (other.birthday != null)
-                return false;
-        } else if (!birthday.equals(other.birthday))
-            return false;
         if (id == null) {
             if (other.id != null)
                 return false;
         } else if (!id.equals(other.id))
             return false;
-        if (specialties == null) {
-            if (other.specialties != null)
-                return false;
-        } else if (!specialties.equals(other.specialties))
-            return false;
         return true;
     }
+
+   
        
     
 

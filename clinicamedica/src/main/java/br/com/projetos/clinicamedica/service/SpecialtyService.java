@@ -12,5 +12,7 @@ public interface SpecialtyService {
 
 	public void save(Specialty theSpecialty);
 
-	public void deleteById(Long theId);
+	public Specialty update(Specialty theSpecialty);
+
+	public boolean deleteById(Long theId);
 }

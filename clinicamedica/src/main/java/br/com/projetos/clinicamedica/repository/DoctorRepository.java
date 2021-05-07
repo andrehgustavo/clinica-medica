@@ -7,5 +7,5 @@ import br.com.projetos.clinicamedica.entity.Doctor;
 
 @RepositoryRestResource(path = "doctors")
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
-    
+    public Doctor findByName(String name);
 }

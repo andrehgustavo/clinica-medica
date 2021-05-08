@@ -15,7 +15,8 @@ public class RootController {
      * @return pagina
      */
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView indexPage() {
+    public ModelAndView indexPage(){
         return new ModelAndView("/webapp/AngularJS/index/index.html");
     }
+
 }

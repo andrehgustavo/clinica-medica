@@ -7,38 +7,62 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="/webapp/resources/css/styles.css">
+
     <title>Clínica Médica</title>
 </head>
 <body>
+    <header class="col-12">
+        <nav class="navbar navbar-light" id="nav1" style="background-color: #04D99D;"></nav>
+        <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: #04D99D;">
+            <a class="navbar-brand" href="/">Clínica</a>
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                class="navbar-toggler" data-target="#navbarSupportedContent" data-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto" style="min-width: 527px;">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/doctors">Médicos <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/specialties">Especialidades Médicas</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
     <div class="col-12" style="width: -moz-available">
         <div ng-app="app" ng-controller="home-controller">
-            
+            <div align="center" ng-view style="width: -moz-available"></div>
         </div>
     </div>
 
     <!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
     <!-- -- -- -- -- -- -- -- -- -- --              Librarys            -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
     <!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --> 
-    <!-- AngularJS min production framework -->
-    <script src="../../resources/library/angular-1.8.2/angular.min.js"></script>
-    <!-- AngularJS min production routing framework -->
-    <script src="../../resources/library/angular-1.8.2/angular-route.min.js"></script>
-    <!-- AngularJS min production resource -->
-    <script src="../../resources/library/angular-1.8.2/angular-resource.min.js"></script>
     <!-- JQuery production resource -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <!-- Bootstrap production resource -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- AngularJS min production framework -->
+    <script src="webapp/resources/library/angularjs/angular.min.js"></script>
+    <!-- AngularJS min production routing framework -->
+    <script src="webapp/resources/library/angularjs/angular-route.min.js"></script>
+    <!-- AngularJS min production resource -->
+    <script src="webapp/resources/library/angularjs/angular-resource.min.js"></script>
     <!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
     <!-- -- -- -- -- -- -- -- -- -- -- --       My scripts        -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->
     <!-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -->    
     <!--My router-->
-    <script src="../../../webapp/AngularJS/index/index-router.js"></script>
+    <script src="webapp/AngularJS/index/index-router.js"></script>
     <!--My Controllers-->
-    <script src="../../../webapp/AngularJS/index/controllers/home-controller.js"></script>
+    <script src="webapp/AngularJS/index/controllers/home-controller.js"></script>
+
     <!--My Factorys-->
-    <script src = "../../../webapp/AngularJS/index/factorys/index-factory.js"></script>
+    <script src = "webapp/AngularJS/index/factorys/index-factory.js"></script>
+
 </body>
 </html>

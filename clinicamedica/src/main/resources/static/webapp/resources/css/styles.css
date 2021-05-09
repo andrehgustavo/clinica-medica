@@ -1,20 +1,56 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 
-.body-home {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+html {
+  font-family: sans-serif;
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
+  display: block;
+}
+
+
+
+
+body {
+  margin: 0;
+  font-family: "Roboto Slab", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  background-color: #fff;
+}
+
+
+.section{
+    height: 100%;
 }
 
 .jumbotron {
-    width: 2000px;
     text-align: center;
-    margin-top: 20px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 50px;
     background-color: #027368;
 }
 
+.jumbotron:hover {
+    background-color: #04D99D;
+    transition: 3s;
+}
+
+.col-jub-50{
+    width: 50%;
+}
+
 .list-item {
+    display: relative;
     color: #F2F2F2;
 }
 
@@ -34,9 +70,7 @@
     padding: auto;
 }
 
-.jumbotron {
-    margin: 10px;
-}
+
 
 #cadatro {
     display: flex;

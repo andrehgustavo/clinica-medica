@@ -1,1 +1,18 @@
-<h1>Novo médico</h1>
+<h1>Novo médico1</h1>
+<div class="jumbotron">
+    <table ng-show="bombas.length > 0" class="table table-striped mt-3">
+        <tr>
+            <th>Nome</th>
+            <th>Nascimento</th>
+            <th>Ativo</th>
+        </tr>
+        <tr>
+            <td>{{newDoctor.name}}</td>
+            <td>{{newDoctor.birthday}}</td>
+            <td>{{newDoctor.active}}</td>
+        </tr>
+    </table>
+    {{vm}}
+{{homeController}}
+{{homeController.name}}
+</div>

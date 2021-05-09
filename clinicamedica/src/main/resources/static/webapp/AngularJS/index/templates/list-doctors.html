@@ -1,1 +1,31 @@
-<h1>Lista de Médicos</h1>
+<div class="container">
+    <div class="jumbotron">
+    <h1>Lista</h1>
+    <div style="width: -moz-available; text-align: right;">
+        <button class="btn btn-outline-dark" data-target="#doctorModalEdit" data-toggle="modal" ng-click="sendDoctor('')" align="right">
+            Adicionar
+        </button>
+    </div>
+    <table ng-show="doctors.length > 0" class="table table-striped mt-3">
+        <tr>
+            <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('id')">ID</a></th>
+            <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('nome')">Nome</a></th>
+            <th class="list-item">Ativo</th>
+            <th class="list-item">Especialidades</th>
+            <th class="list-item" colspan="2">Opções</th>
+        </tr>
+        <tr ng-repeat="doc in doctors | filter: criterioDeBusca | orderBy: criterioDeOrdenacao:direcaoDaOrdenacao">
+            <td>{{doc.id}}</td>
+            <td>{{doc.name}}</td>
+            <td>{{doc.birthday}}</td>
+            <td>{{doc.tempSpecialties}}</td>
+            <td>
+                <a data-toggle="modal" data-target="#doctorModalEdit" ng-if="!equip.edit" ng-click="sendDoctor(doc)" title="Editar"> <img src="webapp/resources/images/iconfinder_edit.png" width="20px"/></a>
+            </td>
+            <td><a class="" ng-if="!equip.edit" ng-click="lineController.delete(equip)" title="Excluir"> <img src="webapp/resources/images/iconfinder_delete.png" width="20px"/></td>
+        </tr>
+    </table>
+
+    <div ng-include="'/webapp/AngularJS/index/templates/doctor-modal.html'"></div>
+</div>
+</div>

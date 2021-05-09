@@ -8,11 +8,11 @@ var app = angular.module('app', ['ngRoute']);
             })
             .when('/doctors', {
                 templateUrl: 'webapp/AngularJS/index/templates/list-doctors.html',
-                controller: 'doctor-controller'
+                controller: 'home-controller'
             })  
             .when('/doctors/newDoctor', {
                 templateUrl: 'webapp/AngularJS/index/templates/form-doctors.html',
-                controller: 'doctor-controller'
+                controller: 'home-controller'
             })                  
             .otherwise({
                 redirectTo: '/'

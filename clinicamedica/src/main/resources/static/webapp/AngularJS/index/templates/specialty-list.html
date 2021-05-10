@@ -9,14 +9,14 @@
         </div>
         <table ng-show="data.specialties.length > 0" class="table table-striped mt-3">
             <tr>
-                <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('id')">ID</a></th>
-                <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('nome')">Nome</a></th>
+                <th class="list-item"><a class=" text-white" href="" ng-click="orderByField('id')">ID</a></th>
+                <th class="list-item"><a class=" text-white" href="" ng-click="orderByField('name')">Nome</a></th>
                 <th class="list-item">Descrição</th>
                 <th class="list-item">Ativo</th>
                 <th class="list-item" colspan="2">Opções</th>
             </tr>
             <tr
-                ng-repeat="spec in data.specialties | filter: criterioDeBusca | orderBy: criterioDeOrdenacao:direcaoDaOrdenacao">
+                ng-repeat="spec in data.specialties | orderBy: orderCriteria:orderDirection">
                 <td>{{spec.id}}</td>
                 <td>{{spec.name}}</td>
                 <td>{{spec.description}}</td>

@@ -1,26 +1,38 @@
 <div class="container">
     <div class="jumbotron green-light">
         <h1>Lista de Médicos</h1>
-        <div style="width: -moz-available; text-align: right;">
-            <button class="btn btn-outline-dark" data-target="#doctorModalEdit" data-toggle="modal"
-                ng-click="sendDoctor(null)" align="right">
-                Adicionar
-            </button>
+        <div class="row row-flex-100">
+            <div class="row-50-left">
+                <select name="filterSpecialty" ng-model="filterSpecialty"
+                    ng-options="spec.name for spec in data.specialties track by spec.id">
+                    <option value="" disabled selected>Filtrar por Especialidade</option>
+                </select>
+                <button class="btn btn-outline-dark" ng-click="cleanFilter()" align="right">
+                    Limpar
+                </button>
+            </div>
+            <div class="row-50-right">
+                <button class="btn btn-outline-dark" data-target="#doctorModalEdit" data-toggle="modal"
+                    ng-click="sendDoctor(null)" align="right">
+                    Adicionar
+                </button>
+            </div>
         </div>
+        
         <table ng-show="data.doctors.length > 0" class="table table-striped mt-3">
             <tr>
-                <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('id')">ID</a></th>
-                <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('nome')">Nome</a></th>
+                <th class="list-item"><a class=" text-white" href="" ng-click="orderByField('id')">ID</a></th>
+                <th class="list-item"><a class=" text-white" href="" ng-click="orderByField('name')">Nome</a></th>
                 <th class="list-item">Nascimento</th>
                 <th class="list-item">Ativo</th>
                 <th class="list-item">Especialidades</th>
                 <th class="list-item" colspan="2">Opções</th>
             </tr>
             <tr
-                ng-repeat="doc in data.doctors | filter: criterioDeBusca | orderBy: criterioDeOrdenacao:direcaoDaOrdenacao">
+                ng-repeat="doc in data.doctors | filter: filterSpecialty.name | orderBy: orderCriteria : orderDirection">
                 <td>{{doc.id}}</td>
                 <td>{{doc.name}}</td>
-                <td>{{doc.birthday.toISOString().slice(0, 10);}}</td>
+                <td>{{doc.birthday | date:'dd/MM/yyyy'}}</td>
                 <td>{{doc.active ? 'SIM' : 'NÃO'}}</td>
                 <td>{{doc.tempSpecialties}}</td>
                 <td>

@@ -1,5 +1,5 @@
 app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory', function ($scope, doctorFactory, specialtyFactory) {
-
+    $scope.filterSpecialty;
     $scope.newDoctor = {
         edit: false,
         id: "",
@@ -42,6 +42,10 @@ app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory'
             tempSpecialties = {};
         });
     });
+
+    $scope.cleanFilter = () => {
+        $scope.filterSpecialty=null;
+    }
 
     //dischard changes
     $scope.trashEdit = function (form) {
@@ -188,9 +192,9 @@ app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory'
         }
     }
 
-    $scope.ordenarPor = function(campo){
-        $scope.criterioDeOrdenacao = campo;
-        $scope.direcaoDaOrdenacao = !$scope.direcaoDaOrdenacao;
+    $scope.orderByField = function(field){
+        $scope.orderCriteria = field;
+        $scope.orderDirection = !$scope.orderDirection;
     };
 
 }]);

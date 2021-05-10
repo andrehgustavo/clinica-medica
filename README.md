@@ -1,7 +1,7 @@
 # clinica-medica
 > Medical Clinics management system.
 
-[![Spring-Boot Version](https://spring.io/images/projects/spring-boot-7f2e24fb962501672cc91ccd285ed2ba.svg)][spring-boot-url]
+[![Spring-Boot Version]][spring-boot-url]
 [![License](http://img.shields.io/:license-apache-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0.html)
 
 This project is a RestFul application, in which it is possible to register, list, edit and delete doctors and specialties and list the doctors of a specific specialty.

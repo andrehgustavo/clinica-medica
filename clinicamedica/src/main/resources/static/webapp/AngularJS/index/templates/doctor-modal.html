@@ -18,14 +18,14 @@
                             </div>
                             <div class="col-xs-4">
                                 <input class="form-control" type="text" ng-model="newDoctor.name" name="name"
-                                    placeholder="Nome"  ng-required="true" />
+                                    placeholder="Nome" ng-required="true" />
                             </div>
                             <div class="col-xs-2">
                                 <h6 class="list-item">Nascimento: </h6>
                             </div>
                             <div class="col-xs-4">
                                 <input class="form-control" type="date" ng-model="newDoctor.birthday" name="birthday"
-                                    placeholder="Nascimento"  ng-required="true" />
+                                    placeholder="Nascimento" ng-required="true" />
                             </div>
                         </div>
                         <div class="form-group row">
@@ -56,12 +56,9 @@
                         </div>
                         <label class="text-left">*Para mais de uma especialidade, segure a tecla "Ctrl" no teclado e
                             escolha as especialidades desejadas."</label>
-                        <!-- Modal footer -->
-                        <div class="modal-footer">
-                            <!-- <button type="submit" ng-click="newDoctor.edit ? saveEdit() : save()"
-                                class="btn btn-secondary" data-dismiss="modal" ng-disabled="doctorForm.name.$dirty">Salvar</button> -->
-                            <!-- <input type="submit" class="btn btn-secondary"value="Enviar"/> -->
-                        </div>
+
+
+
                     </form>
 
                     <div ng-show="doctorForm.name.$invalid && doctorForm.name.$dirty" class="alert alert-danger mt-3">
@@ -69,13 +66,17 @@
                             O campo nome deve ser preenchido!
                         </div>
                     </div>
-                    <div ng-show="doctorForm.birthday.$invalid && doctorForm.birthday.$dirty" class="alert alert-danger mt-3">
+                    <div ng-show="doctorForm.birthday.$invalid && doctorForm.birthday.$dirty"
+                        class="alert alert-danger mt-3">
                         <div ng-message="required">
                             O campo data de nascimento deve ser preenchido!
                         </div>
                     </div>
-                    <button type="submit" ng-click="newDoctor.edit ? saveEdit() : save()"
-                                class="btn btn-secondary" data-dismiss="modal" ng-disabled="doctorForm.$invalid">Salvar</button>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <button type="submit" ng-click="newDoctor.edit ? saveEdit(newDoctor) : save(newDoctor)" class="btn btn-secondary"
+                            data-dismiss="modal" ng-disabled="doctorForm.$invalid">Salvar</button>
+                    </div>
                 </div>
             </div>
 

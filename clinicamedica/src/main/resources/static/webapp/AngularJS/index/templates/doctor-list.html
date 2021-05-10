@@ -1,6 +1,6 @@
 <div class="container">
     <div class="jumbotron green-light">
-        <h1>Lista</h1>
+        <h1>Lista de Médicos</h1>
         <div style="width: -moz-available; text-align: right;">
             <button class="btn btn-outline-dark" data-target="#doctorModalEdit" data-toggle="modal"
                 ng-click="sendDoctor(null)" align="right">
@@ -11,6 +11,7 @@
             <tr>
                 <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('id')">ID</a></th>
                 <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('nome')">Nome</a></th>
+                <th class="list-item">Nascimento</th>
                 <th class="list-item">Ativo</th>
                 <th class="list-item">Especialidades</th>
                 <th class="list-item" colspan="2">Opções</th>
@@ -20,6 +21,7 @@
                 <td>{{doc.id}}</td>
                 <td>{{doc.name}}</td>
                 <td>{{doc.birthday.toISOString().slice(0, 10);}}</td>
+                <td>{{doc.active ? 'SIM' : 'NÃO'}}</td>
                 <td>{{doc.tempSpecialties}}</td>
                 <td>
                     <a class="button-action" data-toggle="modal" data-target="#doctorModalEdit" ng-if="!equip.edit"

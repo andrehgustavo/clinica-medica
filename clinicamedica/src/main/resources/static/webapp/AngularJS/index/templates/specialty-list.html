@@ -1,37 +1,37 @@
 <div class="container">
     <div class="jumbotron green-light">
-        <h1>Lista</h1>
+        <h1>Lista de Especialidades</h1>
         <div style="width: -moz-available; text-align: right;">
             <button class="btn btn-outline-dark" data-target="#specialtyModalEdit" data-toggle="modal"
                 ng-click="sendSpecialty(null)" align="right">
-                Adicionar
+                Adicionar Especialidade
             </button>
         </div>
-        <table ng-show="data.doctors.length > 0" class="table table-striped mt-3">
+        <table ng-show="data.specialties.length > 0" class="table table-striped mt-3">
             <tr>
                 <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('id')">ID</a></th>
                 <th class="list-item"><a class=" text-white" href="" ng-click="ordenarPor('nome')">Nome</a></th>
+                <th class="list-item">Descrição</th>
                 <th class="list-item">Ativo</th>
-                <th class="list-item">Especialidades</th>
                 <th class="list-item" colspan="2">Opções</th>
             </tr>
             <tr
-                ng-repeat="doc in data.doctors | filter: criterioDeBusca | orderBy: criterioDeOrdenacao:direcaoDaOrdenacao">
-                <td>{{doc.id}}</td>
-                <td>{{doc.name}}</td>
-                <td>{{doc.birthday.toISOString().slice(0, 10);}}</td>
-                <td>{{doc.tempSpecialties}}</td>
+                ng-repeat="spec in data.specialties | filter: criterioDeBusca | orderBy: criterioDeOrdenacao:direcaoDaOrdenacao">
+                <td>{{spec.id}}</td>
+                <td>{{spec.name}}</td>
+                <td>{{spec.description}}</td>
+                <td>{{spec.active ? 'SIM' : 'NÃO'}}</td>
                 <td>
-                    <a class="button-action" data-toggle="modal" data-target="#doctorModalEdit" ng-if="!equip.edit"
-                        ng-click="sendSpecialty(doc)" title="Editar"> <img
+                    <a class="button-action" data-toggle="modal" data-target="#specialtyModalEdit"
+                        ng-click="sendSpecialty(spec)" title="Editar"> <img
                             src="webapp/resources/images/iconfinder_edit.png" width="20px" /></a>
                 </td>
                 <td>
-                    <a class="button-action" ng-if="!equip.edit" ng-click="delete(doc)" title="Excluir"> <img
+                    <a class="button-action" ng-click="delete(spec)" title="Excluir"> <img
                             src="webapp/resources/images/iconfinder_delete.png" width="20px" />
                 </td>
             </tr>
         </table>
-        <div ng-include="'/webapp/AngularJS/index/templates/doctor-modal.html'"></div>
+        <div ng-include="'/webapp/AngularJS/index/templates/specialty-modal.html'"></div>
     </div>
 </div>

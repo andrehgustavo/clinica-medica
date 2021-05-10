@@ -5,10 +5,17 @@ app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory'
         id: "",
         name: "",
         birthday: "",
-        active: "",
+        active: true,
         specialties: "",
         tempSpecialties: "",
         tempSpecialtiesId: ""
+    };
+    $scope.newSpecialty = {
+        edit: false,
+        id: "",
+        name: "",
+        description: "",
+        active: true
     };
     $scope.data = {
         specialties: [],
@@ -22,6 +29,7 @@ app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory'
         $scope.data.doctors = value;
         let tempSpecialties = {};
         $scope.data.doctors.forEach(element => {
+            element.type = "doctor";
             element.edit = true;
             var dateStr = element.birthday; //returned from mysql timestamp/datetime field
             var a = dateStr.split(" ");
@@ -37,19 +45,30 @@ app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory'
 
     //dischard changes
     $scope.trashEdit = function (form) {
-        $scope.newDoctor.edit = true;
-        doctorFactory.findById($scope.newDoctor.id)
-            .then(function (response) {
-                $scope.newDoctor.id = response.id;
-                $scope.newDoctor.name = response.name;
-                $scope.newDoctor.birthday = $scope.formateDateFromDb(response.birthday);
-                $scope.newDoctor.active = response.active;
-                $scope.newDoctor.specialties = response.specialties;
-                let tempSpecialties = {};
-                tempSpecialties = tempSpecialties = $scope.getTempSpecialties(response);
-                $scope.newDoctor.tempSpecialties = tempSpecialties.arrayname;
-                $scope.newDoctor.tempSpecialtiesId = tempSpecialties.arrayspecialties;
-            });
+        if (form === "doctorForm") {
+            $scope.newDoctor.edit = true;
+            doctorFactory.findById($scope.newDoctor.id)
+                .then(function (response) {
+                    $scope.newDoctor.id = response.id;
+                    $scope.newDoctor.name = response.name;
+                    $scope.newDoctor.birthday = $scope.formateDateFromDb(response.birthday);
+                    $scope.newDoctor.active = response.active;
+                    $scope.newDoctor.specialties = response.specialties;
+                    let tempSpecialties = {};
+                    tempSpecialties = tempSpecialties = $scope.getTempSpecialties(response);
+                    $scope.newDoctor.tempSpecialties = tempSpecialties.arrayname;
+                    $scope.newDoctor.tempSpecialtiesId = tempSpecialties.arrayspecialties;
+                });
+        } else {
+            $scope.newSpecialty.edit = true;
+            doctorFactory.findById($scope.newSpecialty.id)
+                .then(function (response) {
+                    $scope.newSpecialty.id = response.id;
+                    $scope.newSpecialty.name = response.name;
+                    $scope.newSpecialty.description = response.description;
+                    $scope.newSpecialty.active = response.active;
+                });
+        }
         $scope.reset(form);
     };
     $scope.reset = function (form) {
@@ -57,12 +76,13 @@ app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory'
             form.$setPristine();
             form.$setUntouched();
         }
-        $scope.newDoctor = angular.copy($scope.newDoctor);
+        if(form==="doctorForm"){
+            $scope.newDoctor = angular.copy($scope.newDoctor);
+        }else{
+            $scope.newSpecialty = angular.copy($scope.newSpecialty);
+        }
+        
     };
-
-    $scope.newForm = () => {
-        location.replace('#!/doctors/newDoctor');
-    }
 
     $scope.sendDoctor = tempdoctor => {
         if (tempdoctor != null) {
@@ -73,24 +93,34 @@ app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory'
             $scope.newDoctor.id = "";
             $scope.newDoctor.name = "";
             $scope.newDoctor.birthday = "";
-            $scope.newDoctor.active = "";
+            $scope.newDoctor.active = true;
             $scope.newDoctor.specialties = "";
             $scope.newDoctor.tempSpecialties = "";
             $scope.newDoctor.tempSpecialtiesId = "";
         }
     }
 
-    $scope.save = () => {
-        $scope.newDoctor.specialties = $scope.retrieveSpecialtiesFromId($scope.newDoctor.tempSpecialtiesId);
-        doctorFactory.add($scope.newDoctor);
+    $scope.save = (object) => {
+        if(object.type !== 'undefined' && object.type === "doctor"){
+            $scope.newDoctor.specialties = $scope.retrieveSpecialtiesFromId($scope.newDoctor.tempSpecialtiesId);
+            doctorFactory.add($scope.newDoctor);
+        }else{
+            alert("especialidade")
+            specialtyFactory.add($scope.newSpecialty);
+        }
+        
         location.reload(true);
     }
-    $scope.saveEdit = () => {
-        $scope.newDoctor.specialties = $scope.retrieveSpecialtiesFromId($scope.newDoctor.tempSpecialtiesId);
-        let tempSpecialties = $scope.getTempSpecialties($scope.newDoctor);
-        $scope.newDoctor.tempSpecialties = tempSpecialties.arrayname;
-        $scope.newDoctor.tempSpecialtiesId = tempSpecialties.arrayspecialties;
-        doctorFactory.update($scope.newDoctor);
+    $scope.saveEdit = (object) => {
+        if(object.type !== 'undefined' && object.type === "doctor"){
+            $scope.newDoctor.specialties = $scope.retrieveSpecialtiesFromId($scope.newDoctor.tempSpecialtiesId);
+            let tempSpecialties = $scope.getTempSpecialties($scope.newDoctor);
+            $scope.newDoctor.tempSpecialties = tempSpecialties.arrayname;
+            $scope.newDoctor.tempSpecialtiesId = tempSpecialties.arrayspecialties;
+            doctorFactory.update($scope.newDoctor);
+        }else{
+            specialtyFactory.update($scope.newSpecialty);
+        }
     };
 
     $scope.retrieveSpecialtiesFromId = idList => {
@@ -124,39 +154,43 @@ app.controller('home-controller', ['$scope', 'doctorFactory', 'specialtyFactory'
         return tempSpecialties;
     }
 
-    $scope.delete = doctor => {
-        let box = confirm("Você tem certeza que deseja excluir o médico " + doctor.name + " ?");
-        if (box === true) {
-            doctorFactory.delet(doctor.id)
-                .then(function (value) {
-                    location.reload(true);
-                });
+    $scope.delete = object => {
+        if (object.type == "doctor") {
+            let box = confirm("Você tem certeza que deseja excluir o médico " + object.name + " ?");
+            if (box === true) {
+                doctorFactory.delet(object.id)
+                    .then(function (value) {
+                        location.reload(true);
+                    });
+            }
+        } else {
+            let box = confirm("Você tem certeza que deseja excluir a especialidade " + object.name + " ?");
+            if (box === true) {
+                specialtyFactory.delet(object.id)
+                    .then(function (value) {
+                        location.reload(true);
+                    });
+            }
         }
     };
 
-    $scope.submitForm = () => {
-        alert("Alerta")
-        if ($scope.doctorForm) {
-            alert('our form is amazing');
-        }
-        //jQuery('#doctorModalEdit').modal('hide');
-    }
 
-    $scope.sendSpecialty = tempdoctor => {
-        if (tempdoctor != null) {
+    $scope.sendSpecialty = tempspecialty => {
+        if (tempspecialty !== null) {
+            $scope.newSpecialty = tempspecialty;
             $scope.newSpecialty.edit = true;
-            $scope.newSpecialty = tempdoctor;
         } else {
             $scope.newSpecialty.edit = false;
             $scope.newSpecialty.id = "";
             $scope.newSpecialty.name = "";
             $scope.newSpecialty.birthday = "";
-            $scope.newSpecialty.active = "";
-            $scope.newSpecialty.specialties = "";
-            $scope.newSpecialty.tempSpecialties = "";
-            $scope.newSpecialty.tempSpecialtiesId = "";
+            $scope.newSpecialty.active = true;
         }
     }
 
+    $scope.ordenarPor = function(campo){
+        $scope.criterioDeOrdenacao = campo;
+        $scope.direcaoDaOrdenacao = !$scope.direcaoDaOrdenacao;
+    };
 
 }]);

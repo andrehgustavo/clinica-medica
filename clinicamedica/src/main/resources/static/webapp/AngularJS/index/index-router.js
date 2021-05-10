@@ -7,11 +7,11 @@ var app = angular.module('app', ['ngRoute']);
                 controller: 'home-controller'
             })
             .when('/doctors', {
-                templateUrl: 'webapp/AngularJS/index/templates/list-doctors.html',
+                templateUrl: 'webapp/AngularJS/index/templates/doctor-list.html',
                 controller: 'home-controller'
             })  
-            .when('/doctors/newDoctor', {
-                templateUrl: 'webapp/AngularJS/index/templates/form-doctors.html',
+            .when('/specialties', {
+                templateUrl: 'webapp/AngularJS/index/templates/specialty-list.html',
                 controller: 'home-controller'
             })                  
             .otherwise({

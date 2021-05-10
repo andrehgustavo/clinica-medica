@@ -36,9 +36,7 @@ public class Doctor {
     private boolean active;
 
    
-    @ManyToMany(fetch = FetchType.LAZY,
-			   cascade = {CascadeType.DETACH, CascadeType.MERGE,
-			   CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany
 	@JoinTable(
 			name = "doctor_specialty",
 			joinColumns = @JoinColumn(name = "doctor_id"),

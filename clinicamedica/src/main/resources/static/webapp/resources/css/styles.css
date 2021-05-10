@@ -34,13 +34,19 @@ body {
     height: 100%;
 }
 
+.green-dark {
+    background-color: #027368;
+}
+.green-light {
+    background-color: #04D99D;
+}
+
 .jumbotron {
     text-align: center;
     margin: 50px;
-    background-color: #027368;
 }
 
-.jumbotron:hover {
+#home-page .jumbotron:hover {
     background-color: #04D99D;
     transition: 3s;
 }
@@ -81,4 +87,14 @@ body {
 
 .modal {
     display: flexbox;
+}
+
+.form-line{
+    margin-top: 50px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.button-action{
+    cursor: pointer;
 }

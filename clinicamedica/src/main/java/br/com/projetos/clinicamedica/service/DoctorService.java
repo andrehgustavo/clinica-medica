@@ -14,4 +14,6 @@ public interface DoctorService {
 	public Doctor update(Doctor theDoctor);
 
 	public void deleteById(Long theId);
+
+    public List<Doctor> findAllBySpecialty(Long specialtyId);
 }

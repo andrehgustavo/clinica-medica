@@ -6,6 +6,10 @@
 
 This project is a RestFul application, in which it is possible to register, list, edit and delete doctors and specialties and list the doctors of a specific specialty.
 
+It were used JPA, Spring Boot and PostegreSql.
+
+Persistence and endpoints Tests were implemented using Junit.
+
 
 ## Requirements
 For building and running the application you need:
@@ -51,6 +55,7 @@ mvn spring-boot:run
 
 ## Endpoints
     - [GET] List all doctors ("api/doctors")
+    - [GET] List all doctors by a specific specialty ("/doctors/byspecialty/{specialtyId}")
     - [GET] Read a doctors ("api/doctors/{id}")
     - [POST] Add new doctors ("api/doctors/")
     - [PUT] Update a doctors ("api/doctors/")

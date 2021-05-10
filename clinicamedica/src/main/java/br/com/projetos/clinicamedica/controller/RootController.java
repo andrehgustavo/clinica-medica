@@ -19,15 +19,5 @@ public class RootController {
         return new ModelAndView("/webapp/AngularJS/index/index.html");
     }
 
-    /**
-     * pagina médicos
-     * @return pagina
-     */
-  /*   @RequestMapping(value = "/doctors", method = RequestMethod.GET)
-    public ModelAndView doctorsPage(){
-        return new ModelAndView("/webapp/AngularJS/index/list-doctors.html");
-    } */
-
-
 
 }

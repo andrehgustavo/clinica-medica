@@ -65,5 +65,17 @@ public class DoctorServiceImpl implements DoctorService{
 		}
 		
 	}
+
+	@Override
+	public List<Doctor> findAllBySpecialty(Long specialtyId) {
+		List<Doctor> results = doctorRepository.findBySpecialties_Id(specialtyId);
+		
+		if(!results.isEmpty()) {
+			return results;
+		}else {
+			//Médico não encontrado
+			throw new ErrorRegisterNotFoundInDataBase("Médicos na especialide de id " + specialtyId + " não existe no banco de dados.");
+		}
+	}
     
 }

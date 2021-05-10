@@ -70,4 +70,14 @@ public class DoctorController {
 		}
 	}
 
+	@GetMapping("/doctors/byspecialty/{specialtyId}")
+	public ResponseEntity<?> findAllBySpecialty(@PathVariable Long specialtyId) {
+		try {
+			List<Doctor> theDoctors = doctorService.findAllBySpecialty(specialtyId);
+			return new ResponseEntity<>(theDoctors, HttpStatus.OK);
+		}catch (ErrorRegisterNotFoundInDataBase e) {
+			return ResponseEntity.accepted().body(e.toString());
+		}		
+	}
+
 }
